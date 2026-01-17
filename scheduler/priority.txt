@@ -1,0 +1,5 @@
+../work/work7  1
+sleep 2
+../work/work6  2
+sleep 1
+../work/work5  3
