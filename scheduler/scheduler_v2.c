@@ -1,3 +1,8 @@
+/*
+Γρηγόρης Χριστόπουλος – 1084585 - up1084585@ac.upatras.gr
+Δημοσθένης Αδάμου – 1095908 – up1095908@ac.upatras.gr 
+Αριστάρχος Γερογιάννης – 1084554 - up1084554@ac.upatras.gr 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,10 +44,9 @@ int active_procs = 0;
 #define RR 1
 
 int policy = FCFS;
-int quantum = 100;    /* ms */
+int quantum = 100;    
 double global_t;
 
-// --- Queue Management ---
 
 void proc_queue_init(struct single_queue *q) {
 	q->first = q->last = NULL;
@@ -71,7 +75,6 @@ proc_t *proc_rq_dequeue() {
 	return proc;
 }
 
-// --- Helpers ---
 
 double proc_gettime() {
 	struct timeval tv;
@@ -93,7 +96,6 @@ proc_t *find_proc(int pid) {
 	return NULL;
 }
 
-// --- Signal Handlers ---
 
 void sigchld_handler(int signo, siginfo_t *info, void *context) {
 	proc_t *proc = find_proc(info->si_pid);
@@ -138,7 +140,6 @@ void sigusr2_handler(int signo, siginfo_t *info, void *context) {
 	}
 }
 
-// --- Scheduler Logic ---
 
 void fire_scheduler() {
 	if (running_proc != NULL) return;
@@ -183,8 +184,7 @@ void rr() {
 		fire_scheduler();
 		if (running_proc) {
 			if (nanosleep(&req, &rem) == -1) {
-				// Interrupted by signal (e.g., child exited or I/O)
-				// If running_proc still exists and is still RUNNING, we can continue or stop
+				
 			}
 			
 			if (running_proc && running_proc->status == PROC_RUNNING) {
@@ -194,7 +194,7 @@ void rr() {
 				running_proc = NULL;
 			}
 		} else {
-			// No process ready, just wait for I/O to finish
+
 			pause();
 		}
 	}

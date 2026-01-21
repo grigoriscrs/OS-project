@@ -1,3 +1,8 @@
+/*
+Γρηγόρης Χριστόπουλος – 1084585 - up1084585@ac.upatras.gr
+Δημοσθένης Αδάμου – 1095908 – up1095908@ac.upatras.gr 
+Αριστάρχος Γερογιάννης – 1084554 - up1084554@ac.upatras.gr 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,8 +43,6 @@ struct single_queue global_q;
 proc_t *running_proc = NULL;
 int policy = FCFS_PNP;
 double global_t;
-
-// --- Helper Functions ---
 
 double proc_gettime() {
 	struct timeval tv;
@@ -227,7 +230,7 @@ int main(int argc, char **argv) {
 
     while (fgets(line, MAX_LINE_LENGTH, input) != NULL) {
         int count = sscanf(line, "%s %d", arg1, &arg2);
-        if (count < 1) continue; // Empty line
+        if (count < 1) continue; // Empty 
 
         if (strcmp(arg1, "sleep") == 0) {
             if (count < 2) {
@@ -236,11 +239,9 @@ int main(int argc, char **argv) {
             }
             wait_safe(arg2);
         } else {
-            // New process
             proc_t *proc = malloc(sizeof(proc_t));
             strcpy(proc->name, arg1);
-            // Default priority is 0 if not specified
-            proc->priority = (count >= 2) ? arg2 : 0;
+            proc->priority = (count >= 2) ? arg2 : 0; //default 0
             proc->pid = -1;
             proc->status = PROC_NEW;
             proc->t_submission = proc_gettime();
