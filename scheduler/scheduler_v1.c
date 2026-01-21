@@ -1,6 +1,3 @@
-/* Placeholder Name 1, AM 1234567 */
-/* Placeholder Name 2, AM 2345678 */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

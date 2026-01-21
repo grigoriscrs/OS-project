@@ -1,42 +1,34 @@
-# Session Checkpoint: Phase 1 Complete
+# Session Checkpoint: Phase 2 Complete
 
 ## Status
-**Date:** January 18, 2026
-**Current Phase:** Phase 1 (Priorities & Arrival Times) - **COMPLETE**
-**Next Phase:** Phase 2 (I/O Support)
+**Date:** January 21, 2026
+**Current Phase:** Phase 2 (I/O Support) - **COMPLETE**
+**Next Phase:** Final Documentation & Packaging
 
 ## Accomplishments
-1.  **Implemented `scheduler_v1.c`**:
+1.  **Implemented `scheduler_v2.c`**:
     *   Derived from `scheduler_v0.c`.
-    *   Added `priority` field to `proc_t` struct.
-    *   **Input Parsing**: Switched to `fgets`/`sscanf` to handle optional priority arguments (default 0) and `sleep` commands.
-    *   **Architecture**: Refactored `main` loop to be event-driven (interleaving parsing and execution).
-    *   **Concurrency**: Implemented `wait_safe()` to handle `SIGCHLD` interruptions during `sleep` commands, ensuring the scheduler wakes up to handle process termination.
-    *   **Policies Implemented**:
-        *   `FCFS_PNP` (Non-Preemptive): Runs highest priority to completion.
-        *   `FCFS_PRIO` (Preemptive): Preempts running process if a higher priority one arrives (using `SIGSTOP`/`SIGCONT`).
+    *   **New State**: Added `PROC_WAITING` to handle processes blocked on I/O.
+    *   **Signal Handling**: Implemented handlers for `SIGUSR1` (I/O Start) and `SIGUSR2` (I/O End).
+    *   **Architecture**: Refactored to an event-driven model using `pause()` and `fire_scheduler()`.
+    *   **Concurrency**: Enabled `FCFS` to run other processes when the current one is `WAITING`.
+    *   **Bonus**: Implemented I/O support for the `RR` policy.
 
 2.  **Build System**:
-    *   Updated `scheduler/Makefile` to build `scheduler_v1`.
+    *   Updated `scheduler/Makefile` to build `scheduler_v2`.
 
 3.  **Documentation**:
-    *   Created `scheduler/scheduler_v1_report.md` detailing the changes from v0 to v1, architectural decisions, and logic explanations.
-    *   Added placeholders for Student Name/AM in both the C file header and the report.
+    *   Created `scheduler/scheduler_v2_report.md` detailing the I/O state transitions and logic.
 
 4.  **Verification**:
-    *   Verified `FCFS_PNP` (High prio waits).
-    *   Verified `FCFS_PRIO` (High prio preempts).
-    *   Verified default priority handling (No arg -> priority 0).
+    *   Verified with `mixed.txt`: Confirmed that `work5x2_io` releases the CPU during I/O, allowing `work7` and `work6` to run.
+    *   Verified `RR` policy handles I/O interruptions correctly.
 
 ## File State
-*   `scheduler/scheduler_v1.c`: **Finalized for Phase 1.**
-*   `scheduler/scheduler_v1_report.md`: **Finalized.**
-*   `scheduler/Makefile`: **Finalized.**
-*   `scheduler/priority.txt` (and other test files): **Deleted** (Clean state).
+*   `scheduler/scheduler_v2.c`: **Finalized.**
+*   `scheduler/scheduler_v2_report.md`: **Finalized.**
+*   `scheduler/Makefile`: **Updated.**
 
-## Next Steps (Phase 2)
-1.  Read `PROJECT_OVERVIEW.md` and `scheduler-info.md` to refresh on Phase 2 requirements (I/O Support).
-2.  Copy `scheduler_v0.c` (or `v1` if you want to combine features, though the PDF implies v2 can be independent/based on v0) to `scheduler_v2.c`.
-    *   *Note:* The PDF says "You can base your scheduler_v2.c on the original scheduler_v0.c" but also "scheduler_v2.c implementing the Phase 2 requirements". Usually, v2 is independent of v1 features unless specified. **Important:** Check PDF Page 6: "The version v2 of the scheduler is completely independent from version v1... The usage remains as in the initial version (v0)". This implies v2 does **not** need priorities or sleep commands, just I/O support.
-3.  Implement `SIGUSR1` (I/O Start/Blocking) and `SIGUSR2` (I/O End/Unblocking) handling.
-4.  Implement `WAITING` state.
+## Next Steps
+1.  Final review of all reports (`v1` and `v2`).
+2.  Packaging for submission (Cleanup and Zipping).

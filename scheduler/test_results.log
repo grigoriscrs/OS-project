@@ -1,0 +1,28 @@
+=== TEST A: PHASE 1 PREEMPTION ===
+PID 11536 - CMD: ./work/work5
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 0.00 secs
+PID 11536 - CMD: ./work/work5
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 0.00 secs
+PID 11556 - CMD: ./work/work1
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 2.00 secs
+PID 11536 - CMD: ./work/work5
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 0.00 secs
+PID 11556 - CMD: ./work/work1
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 2.00 secs
+PID 11570 - CMD: ./work/work1
+	Elapsed time = 0.00 secs
+	Execution time = 0.00 secs
+	Workload time = 4.00 secs
+WORKLOAD TIME: 5.00 secs
+scheduler exits
+\n=== TEST B: PHASE 2 I/O CONCURRENCY ===
